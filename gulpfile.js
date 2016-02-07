@@ -21,3 +21,9 @@ gulp.task('deploy-from-local', ['default'], function() {
     .pipe(exec.reporter());
 
 })
+
+gulp.task('deploy-from-local-watch', ['deploy-from-local'], function() {
+
+  var watcher = gulp.watch(srcs, ['deploy-from-local'])
+
+})
