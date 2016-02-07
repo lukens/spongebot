@@ -14,7 +14,7 @@ module.exports = function() {
       message.respond(match[1])
     })
     // laugh maniacally in the channel to annoy everyone
-    .when(/annoy everyone$/, function(message, match) {
+    .when(/^annoy everyone$/i, function(message, match) {
       message.respond(
         "Hahahahallalalalhahhaauuhuhaaalallawwwlalalalwlalalwllaa!",
         null, true)
