@@ -23,6 +23,11 @@ module.exports = function() {
     .when(/^insult me( publicly)?$/i, function(message, match) {
       SpongeBot.insults(message, !!match[1])
     })
+    // show details of the requested github issue
+    .when(/^show( (me|everyone))?( (.+))? (.+) (issue |#)(\d+)$/i, function(message, match) {
+      SpongeBot.githubIssues.showIssue(
+        message, match[4], match[5], match[7], match[2] === "everyone")
+    })
     .listen
 
 }()
