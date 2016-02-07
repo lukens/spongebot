@@ -19,6 +19,10 @@ module.exports = function() {
         "Hahahahallalalalhahhaauuhuhaaalallawwwlalalalwlalalwllaa!",
         null, true)
     })
+    // provide insults when asked, in public if desired
+    .when(/^insult me( publicly)?$/i, function(message, match) {
+      SpongeBot.insults(message, !!match[1])
+    })
     .listen
 
 }()

@@ -3,7 +3,7 @@ var concat = require('gulp-concat')
 var uglify = require('gulp-uglify')
 var exec = require('gulp-exec')
 
-var srcs = ['init.js', 'src/*.js']
+var srcs = ['src/**/*.js', 'init.js']
 
 gulp.task('default', function() {
 
