@@ -28,6 +28,7 @@ module.exports = function() {
       SpongeBot.githubIssues.showIssue(
         message, match[4], match[5], match[7], match[2] === "everyone")
     })
+    // return the listen method
     .listen
 
 }()
