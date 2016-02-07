@@ -1,0 +1,21 @@
+{
+  "name": "spongebot",
+  "version": "0.0.1",
+  "description": "Slack slash command bot designed to run on webtask.io",
+  "main": "spongebot.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://lukens@github.com/lukens/spongebot.git"
+  },
+  "author": "Luke Noel-Storr",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lukens/spongebot/issues"
+  },
+  "homepage": "https://github.com/lukens/spongebot#readme",
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-uglify": "^1.5.1"
+  }
+}
