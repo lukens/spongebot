@@ -1,6 +1,3 @@
-var request = require('request')
-var sprintf = require('sprintf-js').sprintf
-
 // SpongeBot Class, with methods for adding listeners and responding to incoming messages
 function SpongeBot() {
 
