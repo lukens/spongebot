@@ -34,7 +34,7 @@ function SpongeBot() {
     return this
   }
 
-  // the lsitener method, which responds to incoming messages
+  // the listener method, which responds to incoming messages
   this.listen = function(context, callback) {
 
     // create a message object from the context and callback
