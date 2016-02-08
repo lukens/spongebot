@@ -17,6 +17,11 @@
     "gulp": "^3.9.0",
     "gulp-concat": "^2.6.0",
     "gulp-exec": "^2.1.2",
-    "gulp-uglify": "^1.5.1"
+    "gulp-uglify": "^1.5.1",
+    "gulp-util": "^3.0.7",
+    "request": "^2.69.0",
+    "sprintf-js": "^1.0.3",
+    "through2": "^2.0.1",
+    "yamljs": "^0.2.4"
   }
 }
