@@ -132,12 +132,40 @@ gulp.task('gen:url', function() {
   return gulp.src(".gist.json")
     .pipe(through.obj(function(file, enc, callback) {
 
+      // load the gist and profile details into objects
+      var gist = JSON.parse(file.contents.toString())
+
       // use specified profile, or 'default', and log usage
       var profile = process.env.WEBTASK_PROFILE || 'default'
       util.log("Using webtask profile: " + profile + " [$WEBTASK_PROFILE to change]")
 
-      // call the wt cli to get the profile details
-      exec('wt profile get ' + profile, function(error, stdout, stderror) {
+      // use specified name, or 'spongebot', and log usage
+      var name = process.env.WEBTASK_NAME || 'spongebot'
+      util.log("Using webtask name: " + name + " [$WEBTASK_NAME to change]")
+
+      // try loading additional token data from a file token-data.json
+      try {
+
+        var data = JSON.parse(fs.readFileSync('token-data.json', 'utf8'))
+
+        var secrets = ""
+        for (var key in data) {
+          if (data.hasOwnProperty(key)) {
+            secrets += sprintf(" -s %s='%s'", key, data[key])
+          }
+        }
+
+      } catch (error) {
+        // ignore file exists error, bail on other errors
+        if (error.code !== 'ENOENT') {
+          return callback(error)
+        }
+      }
+
+      // call the wt cli to create the token url
+      exec(sprintf(
+        'wt create -n %s -p %s -o token-url %s %s ', name, profile, secrets || "", gist.url),
+        function(error, stdout, stderror) {
 
         // something went wrong :(
         if (error || stderror) {
@@ -146,60 +174,14 @@ gulp.task('gen:url', function() {
         // all good :)
         else {
 
-          // load the gist and profile details into objects
-          // the wt profile output can conveniently be parsed as YAML
-          var gist = JSON.parse(file.contents.toString())
-          var profile = YAML.parse(stdout)
+          // log a curl command to test it out
+          util.log("Give it a go:")
+          console.log(sprintf(
+            "curl -X POST -H 'Content-Type: application/json' -d '{\"text\":\"hello\"}' '%s'",
+            stdout.replace(/\n/g, "")))
 
-          // try loading additional token data from a file token-data.json
-          try {
-            var data = JSON.parse(fs.readFileSync('token-data.json', 'utf8'))
-          } catch (error) {
-            // ignore file exists error, bail on other errors
-            if (error.code !== 'ENOENT') {
-              return callback(error)
-            }
-          }
-
-          // if no data, create new object
-          data = data || {}
-          // if data has no ectx field, create new object
-          data.ectx = data.ectx || {}
-
-          // set the webtask url for the token to the URL we had from the gist
-          data.ectx.webtask_url =  gist.url
-          // we want to parse and merge the body into context.data
-          data.ectx.webtask_pb = 1
-          data.ectx.webtask_mb = 1
-
-          // POST a token issue request to webtask
-          request({
-            url : "https://webtask.it.auth0.com/api/tokens/issue",
-            headers : { "Authorization" : "Bearer " + profile.Token },
-            method : 'POST',
-            json : data
-          }, function(error, response, body) {
-
-            // something went wrong :(
-            if (error || response.statusCode !== 200) {
-              callback(error || body)
-            }
-            // yay, all good! :)
-            else {
-
-              // log a curl command to test it out
-              util.log("Give it a go:")
-              console.log(sprintf(
-                "curl -X POST -H 'Content-Type application/json'"
-                + " -d '{\"text\":\"hello\"}' %s/%s?key=%s",
-                profile["URL"], profile["Container"], body))
-
-              // all done!
-              callback()
-
-            }
-
-          })
+          // all done!
+          callback()
 
         }
 

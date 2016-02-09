@@ -7,7 +7,7 @@ Designed to be easily extensible, and very _very_ loosely based on [Hubot](https
 
 ### Prerequisites
 
-Before using SpongeBot, you will need a [Slack](https://slack.com) account and a [Webtask](https://webtask.io) account. 
+Before using SpongeBot, you will need a [Slack](https://slack.com) account and a [Webtask](https://webtask.io) account.
 
 You will also need to have installed and initialised the [webtask.io command line interface](https://webtask.io/cli).
 
@@ -21,7 +21,7 @@ Full instructions on setting all of that up is beyond the scope of this read me 
 
 ### Installation
 
-The simplest installation is the one I will discuss. 
+The simplest installation is the one I will discuss.
 
 1. install node packages
 2. set an environment variable for your github token
@@ -54,13 +54,12 @@ Example commands:
 
 You can modify commands in `init.js`
 
-For some functionality (github issues) you need to [pass extra data in the token that webtask generates](https://webtask.io/docs/token). To do so, create a file call `token-data.json` in your project root, and set it up like this:
+For some functionality (github issues) you need to [pass extra data in the token that webtask generates](https://webtask.io/docs/token). To do so, create a file call `token-data.json` in your project root, and set it up like this
+(properties will be sent through as secret/`ectx` data):
 
 ```json
 {
-  "ectx" : {
-    "github_api_token" : "<your api token>",
-    "github_organisation" : "<your github organisation, or user>"
-  }
+  "github_api_token" : "<your api token>",
+  "github_organisation" : "<your github organisation, or user>"
 }
 ```
