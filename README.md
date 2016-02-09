@@ -1,23 +1,31 @@
 # spongebot
-SpongeBot is a very simple ChatBot designed to be trigged via a Slack slash-command and hosted on [webtask.io](https://webtask.io).
+SpongeBot is a very simple ChatBot designed to be trigged via a
+Slack slash-command, executed on [webtask.io](https://webtask.io),
+and hosted as a private [Gist](https://gist.github.com).
 
-Designed to be easily extensible, and very _very_ loosely based on [Hubot](https://hubot.github.com).
+Designed to be easily extensible, and very _very_ loosely based
+on [Hubot](https://hubot.github.com).
 
 ## Very Basic Instructions
 
 ### Prerequisites
 
-Before using SpongeBot, you will need a [Slack](https://slack.com) account and a [Webtask](https://webtask.io) account.
+Before using SpongeBot, you will need a [Slack](https://slack.com) account and a
+[Webtask](https://webtask.io) account.
 
-You will also need to have installed and initialised the [webtask.io command line interface](https://webtask.io/cli).
+You will also need to have installed and initialised
+the [webtask.io command line interface](https://webtask.io/cli).
 
-For some functionality, you will also need a [github account](https://github.com) and [api access token](https://github.com/settings/tokens). For ful build functionality to work, you will need to grant it `gist` priviledges.
+For some functionality, you will also need a [github account](https://github.com) and
+[api access token](https://github.com/settings/tokens). For full build functionality to work,
+you will need to grant it `gist` priviledges.
 
 For the build, you will need [Node](https://nodejs.org/en/) and npm.
 
 A local clone of this repository.
 
-Full instructions on setting all of that up is beyond the scope of this read me (aka - you're on your own).
+Full instructions on setting all of that up is beyond the scope of this read me
+(aka - you're on your own).
 
 ### Installation
 
@@ -27,7 +35,8 @@ The simplest installation is the one I will discuss.
 2. set an environment variable for your github token
 3. run the full deployment
 4. run the curl command output
-5. copy-and-paste the url from the curl command into the url field for your [slash command on Slack](https://api.slack.com/slash-commands)
+5. copy-and-paste the url from the curl command into the url field for your
+[slash command on Slack](https://api.slack.com/slash-commands)
 
 All in all, that'll look something like:
 
@@ -40,7 +49,8 @@ All in all, that'll look something like:
 
 ### Usage
 
-Once you have set up the Slack command, type "/spongebot help" for instructions (assuming you have set you slash command up to be called "sponebot" (and why wouldn't you?)).
+Once you have set up the Slack command, type "/spongebot help" for instructions
+(assuming you have set you slash command up to be called "spongebot" (and why wouldn't you?)).
 
 Example commands:
 
@@ -54,7 +64,9 @@ Example commands:
 
 You can modify commands in `init.js`
 
-For some functionality (github issues) you need to [pass extra data in the token that webtask generates](https://webtask.io/docs/token). To do so, create a file call `token-data.json` in your project root, and set it up like this
+For some functionality (github issues) you need to
+[pass extra data in the token that webtask generates](https://webtask.io/docs/token).
+To do so, create a file call `token-data.json` in your project root, and set it up like this
 (properties will be sent through as secret/`ectx` data):
 
 ```json
